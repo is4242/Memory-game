@@ -1,0 +1,188 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eee; /* لون خلفية هادئ */
+}
+
+.box {
+    width: 1080px;
+    margin: 20px auto 0;
+    background-color: #f6f6f6;
+    padding: 20px;
+    font-size: 24px;
+    overflow: hidden;
+    border: 2px solid #2196f3;
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-button{
+    position: fixed;
+     left:0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     z-index:2;
+     background-color: rgba(3,169, 244, 0.9);
+}
+
+.strat{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F44336;
+    color:#fff;
+    padding:15px 25px;
+    font-size:30px;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.game-memory {
+    display: flex;
+    width: 1100px;
+    flex-wrap: wrap;
+    margin: 20px auto;
+}
+
+.block-game {
+    height: 200px;
+    transition: transform .6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    flex: 1 0 200px;
+    margin: 0 10px 20px;
+}
+
+
+
+/* حركة تدوير الكارت عند الهوفر */
+
+
+/* تنسيق الوجهين (الأمامي والخلفي) */
+.face {
+    position: absolute; /* تغيير لـ absolute لضمان تطابق الوجهين */
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    backface-visibility: hidden;
+    border: solid 5px #2196f3;
+    display: flex; /* لتوسيط المحتوى */
+    align-items: center;
+    justify-content: center;
+}
+
+.face.front {
+    background-color: #333;
+    z-index: 2; /* الوجه الأمامي يكون في الأعلى */
+}
+
+.front::before {
+    content: '!';
+    color: #fff;
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.face.back {
+    background-color: #607d8b; /* تم تعديل اللون ليكون أوضح */
+    transform: rotateY(180deg);
+}
+
+/* توحيد حجم الأيقونات والصور */
+.face.back i, 
+.face.back img {
+    font-size: 80px;  /* حجم الأيقونة */
+    width: 80px;      /* عرض الصورة */
+    height: 80px;     /* طول الصورة */
+    color: #fff;
+    object-fit: contain; /* لضمان عدم تمدد الصورة بشكل سيء */
+}
+.turn,.has-match{
+    transform:rotateY(180deg);
+} 
+
+
+/* no-click */
+
+.no-click{
+    pointer-events: none;
+}
+
+
+/* .block-game:hover{
+    transform:rotateY(180deg);
+
+} */
+
+.win {
+    transition: 0.5s ease; 
+    opacity: 0;            
+    pointer-events: none; 
+        transform: translate(-50%, -50%) scale(0.5);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+        background-color: #673ab7;
+    color: #fff;
+    padding: 60px 100px;
+    text-align: center;
+    border-radius: 50px; 
+    border: 5px solid #ff9800;
+    box-shadow: 0 0 20px rgba(103, 58, 183, 0.6), 
+                0 0 40px rgba(255, 152, 0, 0.4);
+        transition: all 0.4s ease-in-out;
+    z-index: 2000;
+}
+
+.win p {
+    font-size: 50px;
+    font-weight: 900;
+    margin: 0 0 30px 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0px #4a148c;
+}
+
+.check {
+    padding: 15px 45px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    text-transform: uppercase;
+    transition: 0.2s;
+    box-shadow: 0 6px 0 #e68a00;
+}
+
+.goscore::before{
+    content:'<';
+}
+.goscore{
+    width: 143px;
+    height: 20px;
+    display: flex;
+    justify-content: right;
+    font-size: 28px;
+    cursor: pointer;
+    justify-content: space-around;
+    transition: 0.5s ease;
+    height: 46px;
+    align-items: center;
+
+}
+
+.goscore:hover{
+    background-color: #008bfd;
+    color: white;
+}

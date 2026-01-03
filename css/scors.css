@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f172a; /* لون داكن عميق */
+    color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.leaderboard-container {
+    width: 90%;
+    max-width: 900px;
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid #334155;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #38bdf8; /* لون أزرق نيون */
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #334155;
+    padding: 15px;
+    font-weight: bold;
+    color: #38bdf8;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #334155;
+    font-size: 1.1rem;
+}
+
+/* تمييز المراكز الثلاثة الأولى */
+.top-three {
+    background: rgba(56, 189, 248, 0.05);
+    font-weight: bold;
+}
+
+.gold { color: #ffd700; text-shadow: 0 0 8px #ffd700; }
+.silver { color: #c0c0c0; }
+.bronze { color: #cd7f32; }
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transition: 0.3s;
+}
+
+.actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(45deg, #3b82f6, #06b6d4);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+}
+
+/* تنسيق بسيط للشاشات الصغيرة */
+@media (max-width: 600px) {
+    td, th { padding: 10px; font-size: 0.8rem; }
+    header h1 { font-size: 1.8rem; }
+}
