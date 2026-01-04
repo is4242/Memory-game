@@ -149,8 +149,6 @@ localStorage.setItem("worng",agin);
     },500);
     
 if  (agin=== 9){
-updateAndRank()
-
 Loes();
 triggerLose()
    };
@@ -165,18 +163,19 @@ memory.classList.add("no-click")
 
 
 
-function Loes(){
-    document.querySelector(".Loess").play()
-    updateAndRank()
-    memory.classList.add("no-click")
+function Loes() {
+    // 1. استدعاء الحفظ فوراً
+    updateAndRank();
+    
+    document.querySelector(".Loess").play();
+    memory.classList.add("no-click");
+
+    // 2. تأخير الـ Alert والـ Reload قليلاً لضمان الحفظ
     setTimeout(() => {
-alert("Loes");
-     location.reload();
-     triggerLose()
-
-}, 1000); 
-
-};
+        alert("Game Over! لقد نفدت محاولاتك.");
+        location.reload();
+    }, 500); // نصف ثانية كافية للحفظ
+}
 //  Teme End  \
   let End = 50;
 
@@ -191,8 +190,7 @@ alert("Loes");
             return; 
         }
 
-        End--; 
-        time.textContent = End; 
+        time.textContent = End--; 
         if (End <= 0) {
             clearInterval(clearIN);
             End = 0; 
@@ -200,6 +198,7 @@ alert("Loes");
             triggerLose(); 
             Loes();
         }
+       
     }, 1000);
 }
 
@@ -212,8 +211,8 @@ location.reload()
 }
 // respons winner
 function Winner(){
-isover = true   
 updateAndRank()
+isover = true   
 setTimeout(() => {
 document.querySelector(".win").play()
 let winDiv = document.createElement("div");
@@ -234,37 +233,25 @@ memory.classList.add("no-click")
 triggerLose()
 };
 
-
-function triggerLose() {
-    isover = true; 
-    let currentTime = document.querySelector(".time").textContent;
-    localStorage.setItem("Data-time", currentTime);
-}
-
-
+// دالة الحفظ المحدثة والمضمونة
 function updateAndRank() {
     let playersList = JSON.parse(localStorage.getItem("AllPlayers")) || [];
     let currentName = sessionStorage.getItem("Date-name");
     
+    if (!currentName || currentName === "") return;
+
     let player = playersList.find(p => p.name === currentName);
 
-    let currentWrong = parseInt(document.querySelector(".trmenal span").innerHTML);
-    let currentTimeLeft = parseInt(document.querySelector(".time").textContent);
+    let currentWrong = parseInt(document.querySelector(".trmenal span").innerText) || 0;
+    let currentTimeLeft = parseInt(document.querySelector(".time").innerText) || 0;
 
     if (player) {
-        if (currentWrong < player.bestWrong) {
-            player.bestWrong = currentWrong;
-            player.bestTime = currentTimeLeft;
-        } 
-
-        else if (currentWrong === player.bestWrong) {
-            if (currentTimeLeft > player.bestTime) {
-                player.bestTime = currentTimeLeft;
-            }
-        }
-        player.totalGames = (player.totalGames || 1) + 1;
+        // هنا حذفنا شرط (if currentWrong < player.bestWrong)
+        // الآن الكود سيحدث البيانات في كل مرة تلعب فيها
+        player.bestWrong = currentWrong; 
+        player.bestTime = currentTimeLeft;
+        player.totalGames = (player.totalGames || 0) + 1;
     } else {
-
         playersList.push({
             name: currentName,
             bestWrong: currentWrong,
@@ -275,3 +262,16 @@ function updateAndRank() {
 
     localStorage.setItem("AllPlayers", JSON.stringify(playersList));
 }
+
+// تحديث دالة triggerLose لتكون متوافقة
+function triggerLose() {
+    isover = true;
+    let currentTime = document.querySelector(".time").textContent;
+    localStorage.setItem("Data-time", currentTime); // للمرجعية فقط
+}
+
+document.querySelector(".goscore").addEventListener("click",()=>{
+location.href='http://127.0.0.1:5501/html/score.html'
+})
+
+
