@@ -37,8 +37,5 @@ if(Math.random() > 0.5)return;
 
 updateUniquePairs();
 
-document.querySelector(".goscore").addEventListener("click",()=>{
-    location.href="http://127.0.0.1:5501/html/score.html"
-})
 
 
